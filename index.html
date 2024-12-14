@@ -1,36 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Roblox Redirect Link Generator</title>
+    <title>Roblox Redirect</title>
     <script>
-        function generateRedirect() {
-            // Get the input value (game ID)
-            const gameId = document.getElementById('gameId').value;
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get the URL path
+            const path = window.location.pathname;
 
-            // Validate the input
+            // Extract the game ID from the path
+            const gameId = path.replace("/", ""); // Remove the leading slash
+
+            // Validate the ID (numeric check)
             if (!gameId || isNaN(gameId)) {
-                alert('Please enter a valid numeric Game ID.');
+                document.body.innerHTML = `
+                    <h1>Invalid Game ID</h1>
+                    <p>Please provide a valid numeric game ID in the URL.</p>
+                `;
                 return;
             }
 
-            // Create the redirect URL
+            // Redirect to the Roblox deep link
             const redirectUrl = `roblox://placeId=${gameId}`;
-
-            // Set the output link
-            const outputLink = document.getElementById('outputLink');
-            outputLink.href = redirectUrl;
-            outputLink.textContent = redirectUrl;
-            outputLink.style.display = 'inline';
-        }
+            window.location.href = redirectUrl;
+        });
     </script>
 </head>
 <body>
-    <h1>Roblox Redirect Link Generator</h1>
-    <p>Enter a Roblox game ID to create a redirect link:</p>
-    <input type="text" id="gameId" placeholder="Enter Game ID">
-    <button onclick="generateRedirect()">Generate Link</button>
-    <p>
-        Your Redirect Link: <a id="outputLink" href="#" style="display: none;"></a>
-    </p>
+    <h1>Redirecting...</h1>
+    <p>If you are not redirected automatically, please check your URL or contact support.</p>
 </body>
 </html>

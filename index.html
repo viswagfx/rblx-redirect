@@ -1,32 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Roblox Redirect</title>
+    <title>Redirecting...</title>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Get the URL path
             const path = window.location.pathname;
+            const gameId = path.replace("/", "");
 
-            // Extract the game ID from the path
-            const gameId = path.replace("/", ""); // Remove the leading slash
-
-            // Validate the ID (numeric check)
-            if (!gameId || isNaN(gameId)) {
+            if (gameId && !isNaN(gameId)) {
+                const redirectUrl = `roblox://placeId=${gameId}`;
+                window.location.href = redirectUrl;
+            } else {
                 document.body.innerHTML = `
                     <h1>Invalid Game ID</h1>
-                    <p>Please provide a valid numeric game ID in the URL.</p>
+                    <p>The game ID in the URL is not valid. Please check the URL and try again.</p>
                 `;
-                return;
             }
-
-            // Redirect to the Roblox deep link
-            const redirectUrl = `roblox://placeId=${gameId}`;
-            window.location.href = redirectUrl;
         });
     </script>
 </head>
 <body>
     <h1>Redirecting...</h1>
-    <p>If you are not redirected automatically, please check your URL or contact support.</p>
 </body>
 </html>

@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redirecting...</title>
+    <title>Roblox Game Redirect</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const path = window.location.pathname;
-            const gameId = path.replace("/", "");
+            // Get the URL path and extract Game ID
+            const path = window.location.pathname; // Example: /12345678
+            const gameId = path.replace("/", "");  // Remove leading slash
 
+            // Validate the Game ID (must be numeric)
             if (gameId && !isNaN(gameId)) {
                 const redirectUrl = `roblox://placeId=${gameId}`;
-                window.location.href = redirectUrl;
+
+                // Redirect to the Roblox deep link (use 'replace' to avoid back navigation)
+                window.location.replace(redirectUrl);
             } else {
+                // If invalid ID, show an error message
                 document.body.innerHTML = `
-                    <h1>Invalid Game ID</h1>
-                    <p>The game ID in the URL is not valid. Please check the URL and try again.</p>
+                    <h1>Invalid or Missing Game ID</h1>
+                    <p>Please enter a valid Game ID in the URL.</p>
                 `;
             }
         });
@@ -21,5 +28,6 @@
 </head>
 <body>
     <h1>Redirecting...</h1>
+    <p>If you are not redirected, ensure Roblox is installed and the Game ID is correct.</p>
 </body>
 </html>
